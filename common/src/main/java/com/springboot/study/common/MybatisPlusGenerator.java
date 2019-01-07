@@ -10,9 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * mybatis-plus代码生成工具
+ * mybatis-plus代码生成工具3.0版本
  * 详细配置：https://mp.baomidou.com/config/generator-config.html
  * @author xieshuang
+ * 若使用请在maven添加以下依赖
+ * <dependency>
+ *             <groupId>org.apache.velocity</groupId>
+ *             <artifactId>velocity</artifactId>
+ *             <version>RELEASE</version>
+ *         </dependency>
  */
 public class MybatisPlusGenerator {
 
@@ -25,6 +31,8 @@ public class MybatisPlusGenerator {
         String PACKAGE1 = packAge;
         // 作者
         String AUTHOR = "谢霜";
+        // 数据库url
+        String DATAURL = "127.0.0.1:3306";
         // 数据库用户名
         String USERNAME = "root";
         // 数据库密码
@@ -75,7 +83,7 @@ public class MybatisPlusGenerator {
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername(USERNAME);
         dsc.setPassword(PASSWORD);
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/"+DATABASE+"?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false");
+        dsc.setUrl("jdbc:mysql://"+DATAURL+"/"+DATABASE+"?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false");
         mpg.setDataSource(dsc);
 
         // 策略配置
@@ -95,7 +103,6 @@ public class MybatisPlusGenerator {
         mpg.setStrategy(strategy);
         // 注入自定义配置，可以在 VM 中使用 cfg.abc 【可无】
         List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
-        // 调整 xml 生成目录演示
         if (A){
             TemplateConfig tc = new TemplateConfig();
             tc.setController("/templates/generate/controller.java.vm");
